@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "wifiou4g_versao_1_0"
