@@ -9,4 +9,12 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="username">Nome do Usuário(a)</string>
+    <string name="password">Senha</string>
+    <string name="login">Conectar-Se</string>
+    <string name="signup">Inscrever-Se</string>
+    <string name="fullname">Nome Completo</string>
+    <string name="email">E-mail</string>
+    <string name="loginhere">Já tem uma conta? <u>Conecte-Se</u> </string>
+    <string name="signuphere">Criar Uma Nova Conta? Conectar-se</string>
 </resources>
