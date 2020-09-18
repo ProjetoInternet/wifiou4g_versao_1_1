@@ -36,6 +36,16 @@ public class SignUp extends AppCompatActivity {
         textViewLogin = findViewById(R.id.loginText);
         progressBar = findViewById(R.id.progress);
 
+        textViewLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
         buttonSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +79,7 @@ public class SignUp extends AppCompatActivity {
                                     progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
 
-                                    if(result.equals("Registro Realizado Com Sucesso")){
+                                    if(result.equals("Sign Up Success")){
                                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), Login.class);
                                         startActivity(intent);
@@ -79,7 +89,7 @@ public class SignUp extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                     }
 
-                                    Log.i("PutData", result);
+                                   // Log.i("PutData", result);
                                 }
                             }
                         }
