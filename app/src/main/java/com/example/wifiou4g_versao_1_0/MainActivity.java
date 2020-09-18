@@ -13,6 +13,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import java.util.List;
@@ -38,30 +39,29 @@ public class MainActivity extends AppCompatActivity {
 
         registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-
-        } else {
+        }
+        else {
             scanWifiList();
         }
-    }
+        }
 
     private void scanWifiList() {
         wifiManager.startScan();
         mywifiList = wifiManager.getScanResults();
         setAdapter();
-
     }
 
     private void setAdapter() {
-        listAdapter = new ListAdapter(getApplicationContext(), mywifiList);
+        listAdapter = new ListAdapter(getApplicationContext(),mywifiList);
         wifiList.setAdapter(listAdapter);
     }
 
-        class WifiReceiver extends BroadcastReceiver {
+    class WifiReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-
         }
     }
 }
+
