@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_user"
                 android:fontFamily="@font/poppinsmedium"
+                android:inputType="textEmailAddress"
                 tools:targetApi="jelly_bean" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,9 +67,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_pass"
+                android:drawableRight="@drawable/ic_pass"
                 android:fontFamily="@font/poppinsmedium"
-                tools:targetApi="jelly_bean"
-                android:drawableRight="@drawable/ic_pass" />
+                android:inputType="textPassword"
+                tools:targetApi="jelly_bean" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ProgressBar
@@ -95,10 +97,27 @@
             android:id="@+id/signUpText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="48dp"
+            android:clickable="true"
             android:fontFamily="@font/poppinsmedium"
             android:text="@string/signuphere"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.159"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
+            tools:targetApi="jelly_bean" />
+
+        <TextView
+            android:id="@+id/forgotpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:fontFamily="@font/poppinsmedium"
+            android:text="@string/forgot"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.811"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
             tools:targetApi="jelly_bean" />
