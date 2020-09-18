@@ -1,57 +1,67 @@
 package com.example.wifiou4g_versao_1_0;
 
-import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-import android.view.View;
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.widget.ListView;
 
-import android.view.Menu;
-import android.view.MenuItem;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    WifiManager wifiManager;
+    WifiReceiver wifiReceiver;
+    ListAdapter listAdapter;
+    ListView wifiList;
+    List mywifiList;
+
+    @SuppressLint("WifiManagerLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
+        wifiList = (ListView) findViewById(R.id.myListView);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        String oi;
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        wifiReceiver = new WifiReceiver();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        registerReceiver(wifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_LOCATION_EXTRA_COMMANDS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+
+        } else {
+            scanWifiList();
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private void scanWifiList() {
+        wifiManager.startScan();
+        mywifiList = wifiManager.getScanResults();
+        setAdapter();
+
+    }
+
+    private void setAdapter() {
+        listAdapter = new ListAdapter(getApplicationContext(), mywifiList);
+        wifiList.setAdapter(listAdapter);
+    }
+
+        class WifiReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
     }
 }
