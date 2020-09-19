@@ -18,4 +18,5 @@
     <string name="loginhere">Já tem uma conta? <u>Conecte-Se</u> </string>
     <string name="signuphere">Criar Uma Nova Conta? </string>
     <string name="forgot">Esqueci a senha </string>
+    <string name="redes_de_wi_fi_dispon_vel">Redes de Wi-Fi Disponível</string>
 </resources>
